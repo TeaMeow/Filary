@@ -42,6 +42,8 @@ section
     
     padding-top: 16px;
     background: #f8f8f8;
+    
+    overflow-x: scroll
 }
 
 .diary-date
