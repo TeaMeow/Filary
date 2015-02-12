@@ -71,6 +71,22 @@ foreach(glob(__DIR__ . '/diary/*.txt') as $Diary)
                               'Date'    => $Date,
                               'MD5'     => $MD5));
 }
+
+
+
+
+/**
+ * Sort
+ *
+ * Sort the posts by last modif time.
+ */
+
+$Modif = array();
+
+foreach($Diarys as $Key => $Val)
+    $Modif[$Key] = $Val['Date'];
+
+array_multisort($Modif, SORT_DESC, $Diarys);
 ?>
 
 <!doctype html>
