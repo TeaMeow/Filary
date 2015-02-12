@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Taipei');
 
 /** The array which we'll store the diays later */
-$Diarys = [];
+$Diarys = array();
 
 /**
  * Generate
@@ -66,10 +66,10 @@ foreach(glob(__DIR__ . '/diary/*.txt') as $Diary)
     $MD5 = md5_file($Diary);
     
     /** Push to the diary collection */
-    $Diarys[] = ['Title'   => $Title,
-                 'Content' => $Content,
-                 'Date'    => $Date,
-                 'MD5'     => $MD5];
+    array_push($Diarys, array('Title'   => $Title,
+                              'Content' => $Content,
+                              'Date'    => $Date,
+                              'MD5'     => $MD5));
 }
 ?>
 
