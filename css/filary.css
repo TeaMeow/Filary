@@ -40,6 +40,7 @@ section
     top: 50px;
     bottom: 0px;
     
+    padding-top: 16px;
     background: #f8f8f8;
 }
 
@@ -102,4 +103,11 @@ section
 .diary-container .content
 {
     color: #969696;
+}
+
+#empty
+{
+    font-size: 16px;
+    color: #656565;
+    font-style: italic;
 }
