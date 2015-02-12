@@ -1,7 +1,0 @@
-Filary is a little project which is belong with TeaMeow,
-
-Filary is a diary blog，Filary will load your text file as a post,
-
-so each time you want to write a post, you just need to add a text file,
-
-and the file name will be the title of the post.
