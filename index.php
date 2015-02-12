@@ -1,6 +1,9 @@
 <?php 
 date_default_timezone_set('Asia/Taipei');
 
+/** The array which we'll store the diays later */
+$Diarys = [];
+
 /**
  * Generate
  *
@@ -77,20 +80,29 @@ foreach(glob(__DIR__ . '/diary/*.txt') as $Diary)
 <link rel="stylesheet" href="css/tocas.css">
 <link rel="stylesheet" href="css/filary.css">
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
-<title>My Filary</title>
+<title>Filary</title>
 </head>
-    
 <body>
-<nav class="shw-e center">
-    <h1>Filary</h1>
-</nav>
+    
+<nav class="shw-e center"><h1>Filary</h1></nav>
+    
 <section>
-    <p>&nbsp;</p>
+    <?php if(empty($Diarys)) { //If there's no any diary now ?>
+    
+    <div id="empty" class="table fill">
+            <div class="table-cell center">
+                <p>目前沒有任何日記。</p>
+                <p>There's no any diary now.</p>
+            </div>
+        </div>
+    
+    <?php } else { //If there's a diary or many of them, then we echo them ?>
+    
     <div class="row center">
-    <?php foreach($Diarys as $Single) Diary($Single); ?>
+        <?php foreach($Diarys as $Single) Diary($Single); ?>
     </div>
-</section>
     
-    
+    <?php } ?>
+</section> 
 </body>
 </html>
