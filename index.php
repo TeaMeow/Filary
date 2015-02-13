@@ -51,15 +51,15 @@ EOF;
  * Get all the diary files
  */
 
+$OS = (DIRECTORY_SEPARATOR == '\\') ? 'Windows' : 'Linux';
+
 foreach(glob(__DIR__ . '/diary/*.txt') as $Diary)
 {
     /** The file name is the title of this diary */
     /** Now we remove the path first, next is the file extension */
-    $Title = iconv("utf-8", "big5", preg_replace('/\.\w*$/', '', preg_replace('/^.+[\\\\\\/]/', '', $Diary)));
-    
-    /** Now convert back to UTF-8 for Chinese */
-    $Title = iconv("big5", "utf-8", $Title);
-    
+    $Title = ($OS == 'Linux') ? preg_replace('/\.\w*$/', '', preg_replace('/^.+[\\\\\\/]/', '', $Diary))
+                              : iconv('BIG5', 'UTF-8', preg_replace('/\.\w*$/', '', preg_replace('/^.+[\\\\\\/]/', '', $Diary)));
+
     /** Get the content */
     $Content = nl2br(htmlspecialchars(file_get_contents($Diary)));
     
