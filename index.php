@@ -56,7 +56,7 @@ foreach(glob(__DIR__ . '/diary/*.txt') as $Diary)
 {
     /** The file name is the title of this diary */
     /** Now we remove the path first, then we remove the file extension */
-    $Title = preg_replace('/\.\w*$/', '', preg_replace('/^.+[\\\\\\/]/', '', $Diary));
+    $Title = iconv("BIG5","UTF-8", preg_replace('/\.\w*$/', '', preg_replace('/^.+[\\\\\\/]/', '', $Diary)));
     
     /** Get the content */
     $Content = nl2br(file_get_contents($Diary));
