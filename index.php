@@ -61,7 +61,7 @@ foreach(glob(__DIR__ . '/diary/*.txt') as $Diary)
     $Title = iconv("big5", "utf-8", $Title);
     
     /** Get the content */
-    $Content = nl2br(file_get_contents($Diary));
+    $Content = nl2br(htmlspecialchars(file_get_contents($Diary)));
     
     /** Get the unix timestramp of the file */
     $Date = filemtime($Diary);
