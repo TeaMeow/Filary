@@ -1,5 +1,4 @@
 <?php 
-header("Content-type: text/html; charset=utf-8"); 
 date_default_timezone_set('Asia/Taipei');
 
 /** The array which we'll store the diays later */
@@ -55,8 +54,9 @@ EOF;
 foreach(glob(__DIR__ . '/diary/*.txt') as $Diary)
 {
     /** The file name is the title of this diary */
-    /** Now we remove the path first, then we remove the file extension */
-    $Title = iconv("BIG5","UTF-8", preg_replace('/\.\w*$/', '', preg_replace('/^.+[\\\\\\/]/', '', $Diary)));
+    $Info = pathinfo($Diary);
+
+    $Title = $Info['filename'];
     
     /** Get the content */
     $Content = nl2br(file_get_contents($Diary));
