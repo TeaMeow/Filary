@@ -54,9 +54,11 @@ EOF;
 foreach(glob(__DIR__ . '/diary/*.txt') as $Diary)
 {
     /** The file name is the title of this diary */
-    $Info = pathinfo($Diary);
-
-    $Title = $Info['filename'];
+    /** Now we remove the path first, next is the file extension */
+    $Title = iconv("utf-8", "big5", preg_replace('/\.\w*$/', '', preg_replace('/^.+[\\\\\\/]/', '', $Diary)));
+    
+    /** Now convert back to UTF-8 for Chinese */
+    $Title = iconv("big5", "utf-8", $Title);
     
     /** Get the content */
     $Content = nl2br(file_get_contents($Diary));
