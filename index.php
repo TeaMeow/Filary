@@ -61,7 +61,7 @@ foreach(glob(__DIR__ . '/diary/*.txt') as $Diary)
                               : iconv('BIG5', 'UTF-8', preg_replace('/\.\w*$/', '', preg_replace('/^.+[\\\\\\/]/', '', $Diary)));
 
     /** Get the content */
-    $Content = nl2br(htmlspecialchars(file_get_contents($Diary)));
+    $Content = nl2br(htmlspecialchars(iconv("BIG5","UTF-8", file_get_contents($Diary))));
     
     /** Get the unix timestramp of the file */
     $Date = filemtime($Diary);
