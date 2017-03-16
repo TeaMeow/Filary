@@ -1,4 +1,4 @@
-# Filary
+# Filary 2
 
 Filary is a simple diary blog **without need of database and configurating**, it uses the *text files* as the posts.
 
