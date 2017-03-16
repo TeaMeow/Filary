@@ -1,6 +1,6 @@
 <?php 
 date_default_timezone_set('Asia/Taipei');
-
+include_once("Parsedown.php");
 /** The array which we'll store the diays later */
 $Diarys = array();
 
@@ -35,15 +35,38 @@ function Diary($SingleDiary)
     <div class="diary-container word-break shw-e g-9 rd-4 text-left border-box">
         <h3>$Title</h3>
         <div class="content">
-            $Content
-        </div>
-    </div>
-    
 EOF;
+    echo GetContent($Content);
+    echo"</div>";
+    echo "</div>";
+    
+
 }
 
+/**
+ * Content Processor
+ *
+ * Convert any base64 to correct filetype
+ */
 
-
+function GetContent($rawcontent){
+	$Parsedown = new Parsedown();
+	$lines = explode("\n",$rawcontent);
+	$rcontent = [];
+	foreach ($lines as &$line){
+		if (strpos($line, 'data:') !== false && strpos($line, 'base64') !== false){
+			//Current line is a special data type that needed to get converted
+			$line = str_replace("<br />","",$line);
+			if (strpos($line, 'image/') !== false){
+				$line = '<img src="' . $line . '"><br>';
+			}
+		}
+		$line = $Parsedown->text($line);
+		array_push($rcontent,$line);
+	}
+	
+	return implode("", $rcontent);
+}
 
 /**
  * Scan 
@@ -61,8 +84,8 @@ foreach(glob(__DIR__ . '/diary/*.txt') as $Diary)
                               : iconv('BIG5', 'UTF-8', preg_replace('/\.\w*$/', '', preg_replace('/^.+[\\\\\\/]/', '', $Diary)));
 
     /** Get the content */
-    $Content = nl2br(htmlspecialchars(iconv("BIG5","UTF-8", file_get_contents($Diary))));
-    
+    #$Content = nl2br(htmlspecialchars(iconv("BIG5","UTF-8", file_get_contents($Diary))));
+    $Content = nl2br(htmlspecialchars(file_get_contents($Diary)));
     /** Get the unix timestramp of the file */
     $Date = filemtime($Diary);
     

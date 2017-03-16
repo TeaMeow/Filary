@@ -61,7 +61,7 @@ section
 .diary-date .month
 {
     font-size: 12px;
-    background: #d0d0d0;
+    background: #474747;
     color: #FFF;
 }
 
@@ -104,7 +104,7 @@ section
 
 .diary-container .content
 {
-    color: #969696;
+    color: #474747;
 }
 
 #empty
