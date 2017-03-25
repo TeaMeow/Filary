@@ -1,4 +1,5 @@
 <?php 
+header('X-Frame-Options: GOFORIT'); 
 date_default_timezone_set('Asia/Taipei');
 include_once("Parsedown.php");
 /** The array which we'll store the diays later */
@@ -51,17 +52,26 @@ EOF;
 
 function GetContent($rawcontent){
 	$Parsedown = new Parsedown();
-	$lines = explode("\n",$rawcontent);
+	$lines = preg_split('/\n|\r\n?/',$rawcontent);
 	$rcontent = [];
 	foreach ($lines as &$line){
-		if (strpos($line, 'data:') !== false && strpos($line, 'base64') !== false){
+		if (strpos($line, 'data:') !== false){
 			//Current line is a special data type that needed to get converted
 			$line = str_replace("<br />","",$line);
-			if (strpos($line, 'image/') !== false){
+			if (strpos($line, 'image/') !== false && strpos($line, 'base64') !== false){
 				$line = '<img src="' . $line . '"><br>';
 			}
+			if (strpos($line, 'iframe/') !== false ){
+				if (strpos($line,'/youtube') !== false){
+				$line ='<iframe width="560" height="315" src="' . str_replace("data:iframe/youtube;","",$line) . '"></iframe>';
+				}else{
+					$line ='<iframe width="560" height="315" src="' . str_replace("data:iframe;","",$line) . '"></iframe>';
+				}
+			}
+			
+		}else{
+			$line = $Parsedown->text($line);
 		}
-		$line = $Parsedown->text($line);
 		array_push($rcontent,$line);
 	}
 	
@@ -123,12 +133,32 @@ array_multisort($Modif, SORT_DESC, $Diarys);
 <link rel="stylesheet" href="css/tocas.css">
 <link rel="stylesheet" href="css/filary.css">
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
-<title>Filary</title>
+<title>Filary2</title>
+
 </head>
 <body>
-    
-<nav class="shw-e center"><h1>Filary</h1></nav>
-    
+<nav class="shw-e center"><h1>Filary2</h1></nav>
+<div style="z-index: 9999;
+  margin-top:0px;
+  position: absolute;
+  top:0;
+  left:0;
+">
+
+</div>
+<div style="z-index: 9999;
+  background-color:#d8d8d8;
+  margin-top: 50px;
+  width: 300px;
+  height:90vh;
+  position: absolute;
+  top:0;
+  left:0;
+  border-right-style: solid;
+  display: none;
+">
+<h2>This bar is for profile picture and buttons</h2>
+</div>
 <section>
     <?php if(empty($Diarys)) { //If there's no any diary now ?>
     
