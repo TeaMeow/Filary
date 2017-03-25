@@ -1,0 +1,3 @@
+#Filary2 Youtube Embeded
+你知道現在 Filary 上能跑 iFrame 了麼？
+data:iframe/youtube;//www.youtube.com/embed/KMU0tzLwhbE

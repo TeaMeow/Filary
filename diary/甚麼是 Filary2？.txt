@@ -1,0 +1,7 @@
+Filary2 是個基於 TeaMeow 的休閒產品所產生的次版本，
+
+Filary2 比起原定的 Filary 增加了更多的功能，包括：
+
+對 MarkDown 語言的支援，Base64 圖片儲存支援，還有iframe embeded 的支援。
+
+由於洨洨安已經放棄了這個計劃所以現在就由 IMUS Laboratory 接手囉~
